@@ -1,23 +1,24 @@
-name: Build Windows EXE
+name: Build Svhost EXE
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Compile
-      run: |
-        g++ autoclicker.cpp -o autoclicker.exe -static -O2
+      - name: Build EXE
+        run: |
+          g++ Svhost.cpp -o Svhost.exe -static -O2 -mwindows
 
-    - name: Upload EXE
-      uses: actions/upload-artifact@v4
-      with:
-        name: autoclicker
-        path: autoclicker.exe
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: Svhost
+          path: Svhost.exe
